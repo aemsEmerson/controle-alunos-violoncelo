@@ -25,10 +25,9 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return "Aluno{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                '}';
+        return "Aluno: " +
+                "id= " + id +
+                ", nome =" + nome;
     }public void setId(int id) {
         this.id = id;
     }
