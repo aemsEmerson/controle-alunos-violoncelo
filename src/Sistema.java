@@ -5,21 +5,31 @@ public class Sistema {
 
     private List<Aluno> alunos;
     private List<Aula> aulas;
+    private int proximoIdAluno = 1;
 
     public Sistema(){
         alunos = new ArrayList<>();
         aulas = new ArrayList<>();
     }
 
-    public void cadastrarAluno(int id, String nome){
-        Aluno aluno = new Aluno(id, nome);
+    public void cadastrarAluno(String nome){
+        Aluno aluno = new Aluno(proximoIdAluno, nome);
         alunos.add(aluno);
+        proximoIdAluno++;
     }
 
     public void listarAlunos(){
         for(Aluno aluno : alunos){
             System.out.println(aluno);
         }
+    }
+    public Aluno buscarAlunoPorId(int id){
+        for(Aluno aluno : alunos){
+            if(aluno.getId() == id){
+                return aluno;
+            }
+        }
+        return null;
     }
 
 

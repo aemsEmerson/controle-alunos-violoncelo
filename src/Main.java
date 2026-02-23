@@ -16,13 +16,10 @@ public class Main {
 
         switch (opcao) {
             case 1 -> {
-                System.out.println("Digite o id para cadastrar o Aluno: ");
-                int id = sc.nextInt();
-                sc.next();
                 System.out.println("Digite o nome para Cadastrar o Aluno: ");
                 String nome = sc.nextLine();
 
-                sistema.cadastrarAluno(id, nome);
+                sistema.cadastrarAluno(nome);
             }
             case 2 -> {
                 sistema.listarAlunos();
