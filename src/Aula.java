@@ -2,34 +2,32 @@ import java.time.LocalDate;
 
 public class Aula {
 
-    private int id;
-    private LocalDate data;
-    private String metodo;
-    private String pagina;
-    private String observacao;
     private Aluno aluno;
+    private String data;
+    private String metodo;
+    private int pagina;
+    private String observacao;
 
     public Aula(){
     }
 
-    public Aula(int id, LocalDate data, String metodo, String pagina, String observacao, Aluno aluno) {
-        this.id = id;
+    public Aula(Aluno aluno, String data, String metodo, int pagina, String observacao) {
+        this.aluno = aluno;
         this.data = data;
         this.metodo = metodo;
         this.pagina = pagina;
         this.observacao = observacao;
-        this.aluno = aluno;
     }
 
-    public int getId() {
-        return id;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public LocalDate getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -41,11 +39,11 @@ public class Aula {
         this.metodo = metodo;
     }
 
-    public String getPagina() {
+    public int getPagina() {
         return pagina;
     }
 
-    public void setPagina(String pagina) {
+    public void setPagina(int pagina) {
         this.pagina = pagina;
     }
 
@@ -57,18 +55,13 @@ public class Aula {
         this.observacao = observacao;
     }
 
-    public Aluno getAluno() {
-        return aluno;
-    }
-
     @Override
     public String toString() {
-        return "Aula{" +
-                ", data=" + data +
-                ", metodo='" + metodo + '\'' +
-                ", pagina='" + pagina + '\'' +
-                ", observacao='" + observacao + '\'' +
-                ", aluno=" + aluno.getNome() +
-                '}';
+        return "\nAluno: " + aluno.getNome() +
+                "\nData: " + data +
+                "\nMetodo: " + metodo +
+                "\nPágina: " + pagina +
+                "\nObservacao: " + observacao +
+                "\n-------------------------------";
     }
 }

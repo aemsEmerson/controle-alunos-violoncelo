@@ -31,6 +31,26 @@ public class Sistema {
         }
         return null;
     }
+    public void cadastrarAula(int idAluno, String data, String metodo, int pagina, String observacao){
+        Aluno aluno = buscarAlunoPorId(idAluno);
+        if (aluno == null){
+            System.out.println("Aluno não encontrado");
+            return;
+        }
+        Aula aula = new Aula(aluno, data, metodo, pagina, observacao);
+        aulas.add(aula);
+        System.out.println("Aula Cadastrada!!!");
+    }
+
+    public void listarAulas(){
+        if (aulas.isEmpty()){
+            System.out.println("Nenhuma aula cadastrada");
+            return;
+        }
+        for(Aula aula: aulas){
+            System.out.println(aula);
+        }
+    }
 
 
 }
