@@ -1,9 +1,10 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Aula {
 
     private Aluno aluno;
-    private String data;
+    private LocalDate data;
     private String metodo;
     private int pagina;
     private String observacao;
@@ -11,7 +12,7 @@ public class Aula {
     public Aula(){
     }
 
-    public Aula(Aluno aluno, String data, String metodo, int pagina, String observacao) {
+    public Aula(Aluno aluno, LocalDate data, String metodo, int pagina, String observacao) {
         this.aluno = aluno;
         this.data = data;
         this.metodo = metodo;
@@ -23,11 +24,11 @@ public class Aula {
         return aluno;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -57,8 +58,9 @@ public class Aula {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return "\nAluno: " + aluno.getNome() +
-                "\nData: " + data +
+                "\nData: " + data.format(formatter) +
                 "\nMetodo: " + metodo +
                 "\nPágina: " + pagina +
                 "\nObservacao: " + observacao +

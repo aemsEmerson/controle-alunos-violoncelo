@@ -25,9 +25,9 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return "Aluno: " +
-                "id= " + id +
-                ", nome =" + nome;
+        return "\nAluno: " +
+                "\nid: " + id +
+                "\nnome: " + nome;
     }public void setId(int id) {
         this.id = id;
     }

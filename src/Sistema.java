@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,36 @@ public class Sistema {
         }
         return null;
     }
-    public void cadastrarAula(int idAluno, String data, String metodo, int pagina, String observacao){
+
+    public void deletarAluno(int id){
+        Aluno aluno = buscarAlunoPorId(id);
+
+        if (aluno == null){
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
+        alunos.remove(aluno);
+
+        //remover tambem as aulas do aluno
+        aulas.removeIf(aula -> aula.getAluno().getId() == id);
+
+        System.out.println("Aluno e suas aulas foram removidos com sucesso!");
+
+    }
+
+
+    public void editarNomeAluno(int id, String novoNome){
+        Aluno aluno = buscarAlunoPorId(id);
+
+        if(aluno == null){
+            System.out.println("Aluno não encontrado!");
+            return;
+        }
+        aluno.setNome(novoNome);
+        System.out.println("Nome atualizado com sucesso");
+    }
+
+    public void cadastrarAula(int idAluno, LocalDate data, String metodo, int pagina, String observacao){
         Aluno aluno = buscarAlunoPorId(idAluno);
         if (aluno == null){
             System.out.println("Aluno não encontrado");
@@ -42,13 +72,24 @@ public class Sistema {
         System.out.println("Aula Cadastrada!!!");
     }
 
-    public void listarAulas(){
-        if (aulas.isEmpty()){
-            System.out.println("Nenhuma aula cadastrada");
+    public void listarAulaPorAluno(int idAluno){
+        Aluno aluno = buscarAlunoPorId(idAluno);
+
+        if (aluno == null){
+            System.out.println("Aluno não encontrado!!!");
             return;
         }
+
+        boolean encontrou = false;
+
         for(Aula aula: aulas){
-            System.out.println(aula);
+            if (aula.getAluno().getId() == idAluno){
+                System.out.println(aula);
+                encontrou = true;
+            }
+        }
+        if(!encontrou){
+            System.out.println("Este Aluno não possui Aulas Cadastradas.");
         }
     }
 
