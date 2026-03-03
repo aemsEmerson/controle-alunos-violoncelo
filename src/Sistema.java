@@ -14,6 +14,11 @@ public class Sistema {
     }
 
     public void cadastrarAluno(String nome){
+        nome = nome.trim();
+        if (verificarDuplicidade(nome)){
+            System.out.println("Já existe um aluno com esse nome");
+            return;
+        }
         Aluno aluno = new Aluno(proximoIdAluno, nome);
         alunos.add(aluno);
         proximoIdAluno++;
@@ -47,6 +52,15 @@ public class Sistema {
 
         System.out.println("Aluno e suas aulas foram removidos com sucesso!");
 
+    }
+
+    private boolean verificarDuplicidade(String nome){
+        for (Aluno aluno : alunos){
+            if (aluno.getNome().equalsIgnoreCase(nome)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
