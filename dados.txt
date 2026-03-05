@@ -1,0 +1,2 @@
+ALUNO;1;Gustavo Francisco
+AULA;1;20/02/2026;DOTZAUER;9;Bom aproveitamento nas liçoes 9 e 10, estudar liçao 11 em diante para proxima semana

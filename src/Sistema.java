@@ -1,16 +1,22 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
 
+    private static final String CAMINHO_ARQUIVO = "dados.txt";
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private List<Aluno> alunos;
-    private List<Aula> aulas;
+
     private int proximoIdAluno = 1;
 
     public Sistema(){
         alunos = new ArrayList<>();
-        aulas = new ArrayList<>();
+
     }
 
     public void cadastrarAluno(String nome){
@@ -48,7 +54,7 @@ public class Sistema {
         alunos.remove(aluno);
 
         //remover tambem as aulas do aluno
-        aulas.removeIf(aula -> aula.getAluno().getId() == id);
+        aluno.getAulas().removeIf(aula -> aula.getAluno().getId() == id);
 
         System.out.println("Aluno e suas aulas foram removidos com sucesso!");
 
@@ -78,11 +84,11 @@ public class Sistema {
     public void cadastrarAula(int idAluno, LocalDate data, String metodo, int pagina, String observacao){
         Aluno aluno = buscarAlunoPorId(idAluno);
         if (aluno == null){
-            System.out.println("Aluno não encontrado");
+            System.out.println("Aluno não encontrado!! Aula Não Cadastrada!!");
             return;
         }
         Aula aula = new Aula(aluno, data, metodo, pagina, observacao);
-        aulas.add(aula);
+        aluno.getAulas().add(aula);
         System.out.println("Aula Cadastrada!!!");
     }
 
@@ -96,7 +102,7 @@ public class Sistema {
 
         boolean encontrou = false;
 
-        for(Aula aula: aulas){
+        for(Aula aula: aluno.getAulas()){
             if (aula.getAluno().getId() == idAluno){
                 System.out.println(aula);
                 encontrou = true;
@@ -108,4 +114,30 @@ public class Sistema {
     }
 
 
+    public void salvarEmArquivo(){
+
+        try(BufferedWriter writer = new BufferedWriter(
+                new FileWriter(CAMINHO_ARQUIVO))) {
+            for (Aluno aluno : alunos){
+
+                //Linha aluno
+                writer.write(("ALUNO;" + aluno.getId() + ";" + aluno.getNome()));
+                writer.newLine();
+
+                //Linha das aulas do aluno
+                for (Aula aula : aluno.getAulas()){
+                    writer.write("AULA;" +
+                            aluno.getId() + ";" +
+                            aula.getData().format(formatter) + ";" +
+                            aula.getMetodo() + ";" +
+                            aula.getPagina() + ";" +
+                            aula.getObservacao());
+                    writer.newLine();
+                }
+            }
+            System.out.println("Dados Salvos com Sucesso !!!");
+        } catch (IOException e){
+            System.out.println("Erro ao salvar o arquivo" + e.getMessage());
+        }
+    }
 }

@@ -86,7 +86,10 @@ public class Main {
 
             }
 
-            case 0 -> System.out.println("Encerrando...");
+            case 0 -> {
+                sistema.salvarEmArquivo();
+                System.out.println("Encerrando...");
+            }
 
             default -> System.out.println("Opção inválida!");
             }

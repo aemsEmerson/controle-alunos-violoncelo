@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
 
+    private List<Aula> aulas = new ArrayList<>();
     private int id;
     private String nome;
 
@@ -9,6 +13,10 @@ public class Aluno {
     public Aluno(int id, String nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    public List<Aula> getAulas(){
+        return aulas;
     }
 
     public int getId() {
